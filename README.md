@@ -103,8 +103,7 @@ Structure of output files :
 
 ```
 output
-├── save_tr_def.csv
-├── save_tr_nbr.csv
+├── all_tr_info.csv
 ├── save_tr_times.csv
 ├── save_nbr_RNAPs_hooked.npz
 ├── all_res
@@ -119,8 +118,7 @@ output
 
 ```
 Main output files:
-  * *save_tr_def.csv*: (Human readable csv file) List of possible transcripts in the simulation (based on the provided TSS/TTS files), with detailed information: transcript ID, TU index (as provided in TSS/TTS files), strand (+1 or -1), start position, end position, basal rate (computed from the TSS basal rate, corrected by TTS probabilities in case of imperfect terminators).
-  * *save_tr_nbr.csv*: (Human readable csv file) Number of expressed RNAs for each transcript ID. 
+  * *all_tr_info.csv*: (Human readable csv file) List of possible transcripts in the simulation (based on the provided TSS/TTS files), with detailed information: TU index (as provided in TSS/TTS files), transcript ID, TSS (start) position, TSS strength (basal rate), strand (+1 or -1), end position, transcript strength (computed from the TSS basal rate, corrected by TTS probabilities in case of imperfect terminators), number of expressed RNAs for each transcript.
   * *save_tr_times.csv*: (Human readable csv file) RNAs expression times for each transcript ID (in seconds). 
   * *save_nbr_RNAPs_hooked.npz* : Number of elongating RNA Polymerases at regular time intervals along the simulation. 
 
