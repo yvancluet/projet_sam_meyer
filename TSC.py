@@ -668,7 +668,7 @@ def start_transcribing(INI_file, output_path=None, resume=False):
 
         if output_path is None:
             # no resume ==> set the 'output_path' to 'first_output'
-            output_path = "first_output"
+            output_path = "output"
             # 'output_path' variable is used to save the output files
             # in 'save_files()' function
 
