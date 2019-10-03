@@ -191,9 +191,9 @@ x0_topo = -0.04
 
 
 
-## Code Example (UPDATE REQUIRED!!!!!)
+## Code Example
 
-You can test the example by going to the `analysis_scripts` directory (provided with the package) and type the following command :
+You can test the example provided by typing the following command from the main directory :
 
 ```
 # Execute the script by providing the parameter file and the input directory (the output directory path is optional)
@@ -205,10 +205,7 @@ NOTE : The input directory should contain the *GFF*, *TSS*, *TTS*  and the *Prot
 
 If the simulation ended successfully, you'll get the output files as described [above](#output-files).
 
-You can use the script that read the npz files and show the simulation by using the `film_from_npz.py` script and specifying the parameters and the output files path from which the information will be read :
-```
-python film_from_npz.py example/params.ini example/output
-```  
+The plotting package TSC_plotting.py contains some useful functions for result analysis and plotting, but the latter usually require a specific code. 
 
 ## License
 
