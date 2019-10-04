@@ -371,7 +371,8 @@ def plot_transcription_profile(init_file, output_dir, plotfile=None, basal_profi
     #nbs=np.loadtxt(output_dir+"/save_tr_nbr.csv",delimiter="\t",usecols=[0]) # number of mRNAs for each possible transcript
     starts=np.array(a[:,1]/60,dtype=int)
     ends=np.array(a[:,2]/60,dtype=int)
-    n = len(cov_bp)
+    nbs=np.array(a[:,-1])
+    n=len(cov_bp)
     res=np.zeros(n)
     baslev=np.zeros(n)
     for i,s in enumerate(starts):
@@ -390,7 +391,7 @@ def plot_transcription_profile(init_file, output_dir, plotfile=None, basal_profi
             # normalize res and baslev
             nres=res/np.mean(np.abs(res))
             nbaslev=nbaslev=baslev/np.mean(np.abs(baslev))
-            plot_genome_and_features(plotfile, init_file, signals=[("expression", "a", nres),("basal", "r", nbaslev)], width=4, height=3, ylabel="level")
+            plot_genome_and_features(plotfile, init_file, signals=[("expression", "a", nres),("basal", "r", nbaslev)], width=4, height=2.5, ylabel="expr level")
         else:
             plot_genome_and_features(plotfile, init_file, signals=[("expression", "a", res)], width=4, height=3, ylabel="level")
     return res, baslev

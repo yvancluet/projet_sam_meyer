@@ -56,18 +56,19 @@ This file is mainly used to extract the simulated genome length, given by the "r
 #!gff-spec-version 1.20
 #!processor NCBI annotwriter
 ##sequence-region chrom1genes 1 34000
-chrom5genes RefSeq  region  1 34000 . + . ID=id0;Name=chrom1genes
+chrom1genes RefSeq  region  1 34000 . + . ID=id0;Name=chrom1genes
 chrom1genes RefSeq  gene  1201  13200 . + . ID=gene0;Name=gene0
 ```
 
 #### Transcription Start Site file (TSS):
 The TSS file describes the list of TSS in the simulated genome. For each of them, it contains 4 information data :
-* *TUindex* : The transcription unit index.
+* *TUindex* : The transcription unit (TU) index.
 * *TUorient* : The TU orientation ("+" for forward or "-" for reverse)
 * *TSS_pos* : The TSS position in the chromosome.
 * *TSS_strength* : The basal initiation rate (in $s^{-1}$).
 
-The use of TUs is optional: if all TSS and TTS (see below) have the same TU index, the program will generate a list of possible transcripts based on their positions and orientations in the genome (for each TSS, transcription ends when a perfect terminator is reached in the given orientation). If different TU indexes are provided, then transcription can only occur between TSSs and TTSs of the same TU (take care that a perfect terminator is given for each TU, with meaningful position and orientation). In all cases, a list of possible transcripts with detailed information is generated (see outputs). 
+The lists of TSSs and TTSs (below) together define the transcriptional landscape of the provided genome. In principle, the program first determines all possible transcripts with these start and stop sites  (for each TSS, transcription ends when a perfect terminator is reached in the given orientation). 
+The use of TUs is optional: if all TSS and TTS (see below) have the same TU index, the program will generate a list of possible transcripts based on their positions and orientations in the genome. If different TU indexes are provided, then transcription can only occur between TSSs and TTSs of the same TU (take care that a perfect terminator is given for each TU, with meaningful position and orientation). In all cases, a list of possible transcripts with detailed information is generated (see outputs).
 
 ```
 TUindex TUorient  TSS_pos TSS_strength
@@ -198,7 +199,7 @@ You can test the example provided by typing the following command from the main 
 ```
 # Execute the script by providing the parameter file and the input directory (the output directory path is optional)
 # python start_simulation.py path/to/the/params.ini [output/path]
-python start_simulation.py example/params.ini
+python start_simulation.py example_1/params.ini
 ```
 
 NOTE : The input directory should contain the *GFF*, *TSS*, *TTS*  and the *Protein barrier* file.

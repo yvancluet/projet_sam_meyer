@@ -1,8 +1,0 @@
-##gff-version 3
-#!gff-spec-version 1.20
-#!processor NCBI annotwriter
-##sequence-region chrom3genes 1 6000
-chrom3genes	RefSeq	region	1	6000	.	+	.	ID=id0;Name=chrom3genes
-chrom3genes	RefSeq	gene	500	1400	.	+	.	ID=gene0;Name=gene0
-chrom3genes	RefSeq	gene	1900	2900	.	-	.	ID=gene1;Name=gene1
-chrom3genes	RefSeq	gene	3400	4900	.	+	.	ID=gene2;Name=gene2

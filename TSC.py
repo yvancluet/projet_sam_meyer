@@ -778,7 +778,7 @@ def start_transcribing(INI_file, output_path=None, resume=False):
 
         # get the initiation rates
         # calculate the initiation rate of each transcript/gene
-        init_rate = f_init_rate(tss_strength, sigma_tr_start, sigma_t, epsilon, m)
+        init_rate = f_init_rate(tr_rate, sigma_tr_start, sigma_t, epsilon, m)
         # use the calculated init_rate to get the probability
         # of RNAPol's binding to each TSS (e.g prob_init_rate)
         sum_init_rate = np.sum(init_rate)
@@ -1093,7 +1093,7 @@ def start_transcribing(INI_file, output_path=None, resume=False):
             mean_sig_wholeGenome = (Barr_sigma[0] + Barr_sigma[1]) / 2
 
         # Update the initiation rate
-        init_rate = f_init_rate(tss_strength, sigma_tr_start, sigma_t, epsilon, m)
+        init_rate = f_init_rate(tr_rate, sigma_tr_start, sigma_t, epsilon, m)
 
         if t % OUTPUT_STEP == 0:
             tt = int(t // OUTPUT_STEP)
