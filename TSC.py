@@ -79,6 +79,8 @@ def f_init_rate(tr_prob, sig, sigma_t, epsilon, m):
     return tr_prob_sig
 
 
+#### Generate list of transcripts, handling all sorts of problems ####
+
 def is_gene_crossing_origin(ts_sorted, genome_size):
     """
     Check if there's a gene crossing the origin, there are four
