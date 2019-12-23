@@ -15,7 +15,7 @@ def _main():
     parser.add_argument("params", help="relative path to the 'params.ini' file")
     parser.add_argument("-o",
                         help="the output directory: it will be created if it doesn't exist "
-                             "(default: 'first_output' or 'resume_output', "
+                             "(default: 'output' or 'resume_output', "
                              "depending on whether the simulation is resumed or not)")
     args = parser.parse_args()
 

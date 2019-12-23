@@ -331,7 +331,8 @@ def get_tr_info(TU_tr_ids, ts):
                 current_row = ts.loc[ts['segment_id'] == segment_id]
                 # using this (current_row) info we can build the tr_info dictionnary
                 one_tr_info = {
-                    'TUindex': TU_id,
+                    #'TUindex': TU_id,
+                    'TUindex': current_row["TUindex"].values[0],
                     'tr_id': tr_id,
                     'tr_TSS_pos': current_row["TSS_pos"].values[0],
                     'tr_TSS_strength': current_row["TSS_strength"].values[0],
@@ -350,13 +351,13 @@ def get_tr_info(TU_tr_ids, ts):
     # rid of TSS<-->TSS and TTS<-->TTS regions that are considered as segment
     tr_info.drop_duplicates(['tr_TSS_pos', 'tr_TTS_pos'], inplace=True, keep='last')
     # reset the index (after removing the duplicated lines)
+    tr_info.sort_values(by=["TUindex","tr_id"],inplace=True)
     tr_info.reset_index(inplace=True)
     # assign the index to tr_id
     tr_info['tr_id'] = tr_info.index.values
     # remove the index column
     tr_info.drop('index', axis=1, inplace=True)
-    return tr_info
-
+    return tr_info.astype({'TUindex': int, 'tr_id': int, 'tr_TSS_pos': int, 'TSS_id': int, 'tr_TTS_pos': int})
 
 def calc_proba_off(tr_info):
     """
@@ -383,7 +384,7 @@ def calc_proba_off(tr_info):
             # And update it value in the current row 'r'
             tr_info.at[r, 'tr_rate'] = tr_proba_off
             proba_rest = (1 - current_proba_off) * proba_rest
-    tr_info.to_csv("transcripts_info.csv", sep="\t", index=False)
+    #tr_info.to_csv("transcripts_info.csv", sep="\t", index=False)
     return tr_info
 
 
@@ -563,17 +564,19 @@ def start_transcribing(INI_file, output_path=None, resume=False):
 
     TUs = get_TUs(ts)
     TU_tr_ids = get_TU_tr_ids(TUs)
+    #print("TUs---")
+    #print(TUs)
     tr_info = get_tr_info(TU_tr_ids, ts)
     tr_info = calc_proba_off(tr_info)
 
     # get all possible transcripts and their info
     tr_id = tr_info["tr_id"].values
-    tr_TU = tr_info["TUindex"].values
+    tr_TU = tr_info["TUindex"].values.astype(int)
     tr_strand = str2num(tr_info["tr_TUorient"].values)
-    tr_start = tr_info["tr_TSS_pos"].values
-    tr_end = tr_info["tr_TTS_pos"].values
+    tr_start = tr_info["tr_TSS_pos"].values.astype(int)
+    tr_end = tr_info["tr_TTS_pos"].values.astype(int)
     tss_strength = tr_info["tr_TSS_strength"].values
-    tr_size = abs(tr_end - tr_start)
+    tr_size = abs(tr_end - tr_start).astype(int)
     tr_rate = tr_info["tr_rate"].values
     tss_id = tr_info["TSS_id"].values
     ts_beg_all_trs = np.zeros(len(tr_id), dtype=int)
